@@ -1,12 +1,12 @@
 
-export default async function AuthLayout({
+export default async function RootLayout({
     children,
   }: Readonly<{
     children: React.ReactNode;
   }>) {
 
     return (
-      <div className="flex h-screen flex-col ">
+      <div className="flex h-screen">
           <main className="flex-1">{children}</main>
       </div>
     );

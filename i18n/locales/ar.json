@@ -1,0 +1,79 @@
+{
+  "auth": {
+    "sign_in": {
+      "welcome": "Parcelts مرحباً بك في",
+      "welcome_description": "أدخل بيانات اعتماد تسجيل الدخول الخاصة بك للوصول إلى حسابك",
+      "title": "Parcelts - المصادقة",
+      "description": "قم بإنشاء حساب للوصول إلى مساحتك الشخصية",
+      "email": "البريد الإلكتروني",
+      "email_placeholder": "أدخل بريدك الإلكتروني",
+      "password": "كلمة المرور",
+      "password_placeholder": "أدخل كلمة المرور",
+      "sign_in": "تسجيل الدخول",
+      "forgot_password": "هل نسيت كلمة المرور؟",
+      "remember_me": "تذكرني",
+      "sign_up": "إنشاء حساب",
+      "no_account": "ليس لديك حساب؟",
+      "validation": {
+        "email_required": "البريد الإلكتروني مطلوب",
+        "email_invalid": "البريد الإلكتروني غير صالح",
+        "password_required": "كلمة المرور مطلوبة"
+      }
+    },
+    "sign_up": {
+      "title": "إنشاء حساب",
+      "description": "أدخل بيانات اعتماد تسجيل الدخول الخاصة بك للوصول إلى حسابك",
+      "email": "البريد الإلكتروني",
+      "email_placeholder": "أدخل بريدك الإلكتروني",
+      "username": "اسم المستخدم",
+      "password": "كلمة المرور",
+      "password_placeholder": "أدخل كلمة المرور",
+      "password_description": "8 أحرف على الأقل مع توفر حرف كبير وصغير ورقم وحرف خاص",
+      "username_placeholder": "أدخل اسم المستخدم",
+      "password_confirmation": "تأكيد كلمة المرور",
+      "password_confirmation_placeholder": "أدخل تأكيد كلمة المرور",
+      "account_already_exists": "لديك حساب؟",
+      "sign_in": "تسجيل الدخول",
+      "validation": {
+        "username_min": "اسم المستخدم يجب أن يكون على الأقل 6 أحرف",
+        "username_max": "اسم المستخدم يجب أن يكون على الأكثر 20 حرف",
+        "username_regex": "اسم المستخدم يمكن أن يحتوي فقط على الحروف والأرقام والشرطات والشرطات السفلية",
+        "username_numbers": "اسم المستخدم لا يمكن أن يحتوي على أرقام فقط",
+        "username_special_characters": "اسم المستخدم لا يمكن أن يحتوي على أحرف خاصة مثل @$!%*?&",
+        
+        "password_min": "كلمة المرور يجب أن يكون على الأقل 8 أحرف",
+        "password_uppercase": "كلمة المرور يجب أن يكون على الأقل 1 حرف كبير",
+        "password_lowercase": "كلمة المرور يجب أن يكون على الأقل 1 حرف صغير",
+        "password_numbers": "كلمة المرور يجب أن تحتوي على رقم واحد على الأقل",
+        "password_special_characters": "كلمة المرور يجب أن يكون على الأقل 1 حرف خاص",
+        "password_confirmation_required": "تأكيد كلمة المرور مطلوب",
+        "password_confirmation_match": "كلمة المرور وتأكيد كلمة المرور لا تتطابق",
+
+        "username_required": "اسم المستخدم مطلوب",
+        "email_required": "البريد الإلكتروني مطلوب",
+        "email_invalid": "البريد الإلكتروني غير صالح",
+        "password_required": "كلمة المرور مطلوبة"
+      }
+    },
+    "forget_password": {
+      "title": "هل نسيت كلمة المرور؟",
+      "description": "سنرسل كلمة المرور الجديدة إلى حسابك عبر البريد الإلكتروني",
+      "email": "البريد الإلكتروني",
+      "email_placeholder": "أدخل بريدك الإلكتروني",
+      "send_email": "إرسال البريد الإلكتروني",
+      "back_to_sign_in": "العودة إلى تسجيل الدخول",
+      "email_required": "البريد الإلكتروني مطلوب",
+      "email_invalid": "البريد الإلكتروني غير صالح"
+    }
+  },
+  "not_found": {
+    "title": "الصفحة غير موجودة",
+    "description": "الصفحة التي تبحث عنها غير موجودة. قد تم نقلها أو حذفها أو أدخلت عنوانًا غير صحيح",
+    "back_to_home": "العودة إلى الصفحة الرئيسية",
+    "go_back": "العودة"
+  },
+  "LocaleSwitcher": {
+    "label": "اللغة",
+    "locale": "{locale, select, fr {الفرنسية} ar {العربية} other {Unknown}}"
+  }
+}
