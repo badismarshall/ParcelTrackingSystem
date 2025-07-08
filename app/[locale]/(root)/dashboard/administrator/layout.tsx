@@ -6,7 +6,7 @@ export default async function AdministratorLayout({
 
     return (
       <>
-          <main>{children}</main>
+          <div>{children}</div>
       </>
     );
 }

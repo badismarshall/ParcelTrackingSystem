@@ -21,10 +21,10 @@ export default async function DashboardLayout({
         {userrole === 'customer' && <CustomerSidebar />}
         <SidebarInset className="px-2 pt-2">
             <HeaderInsetSidebar/>
-            {/* <SidebarTrigger />	 */}
-            <div className="gap-4 mt-7 sm:mt-2 sm:pt-2 md:gap-8 p-4 px-4 lg:px-6">
+            {/* <SidebarTrigger />	 */}  
+            {/* <div className="gap-4 mt-7 sm:mt-1 sm:pt-2 md:gap-8 px-1 lg:px-3"> */}
                 {children}
-            </div>
+            {/* </div> */}
         </SidebarInset>
       </SidebarProvider>
     </>
