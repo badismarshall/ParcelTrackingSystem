@@ -1,0 +1,1 @@
+Use Notification Component from OriginUi

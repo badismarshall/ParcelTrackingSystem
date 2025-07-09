@@ -1,4 +1,4 @@
-import { Box, CreditCard, Home, Settings, ShoppingBag } from "lucide-react"
+import { Box, CreditCard, Gift, Home, Settings, ShoppingBag } from "lucide-react"
 
 
   export const customerSidebarItemsGeneral = [
@@ -24,6 +24,12 @@ import { Box, CreditCard, Home, Settings, ShoppingBag } from "lucide-react"
       title: 'Paiements',
       url: '/dashboard/customer/payments',
       icon: CreditCard,
+      isActive: false,
+    },
+    {
+      title: 'Récompenses',
+      url: '/dashboard/customer/rewards',
+      icon: Gift,
       isActive: false,
     },
   ]

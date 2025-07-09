@@ -1,7 +1,6 @@
 import { promises as fs } from "fs"
 import path from "path"
 import { Metadata } from "next"
-import Image from "next/image"
 import { z } from "zod"
 
 import { columns } from "./_components/table/ordersTableColumns"
@@ -27,24 +26,7 @@ export default async function OrdersPage() {
     const orders = await getOrders()
       
     return (
-        <div className="@container/main flex flex-1 flex-col gap-2">
-        {/* <div className="md:hidden">
-          <Image
-            src="/examples/orders-light.png"
-            width={1280}
-            height={998}
-            alt="Playground"
-            className="block dark:hidden"
-          />
-          <Image
-            src="/examples/orders-dark.png"
-            width={1280}
-            height={998}
-            alt="Playground"
-            className="hidden dark:block"
-          />    
-        </div> */}
-        <div className="h-full flex-1 flex-col space-y-8 p-8 md:flex">
+        <div className="h-full flex-1 flex-col space-y-8">
           <div className="flex items-center justify-between space-y-2">
             <div>
               <h2 className="text-2xl font-bold tracking-tight">Content de te revoir!</h2>
@@ -59,7 +41,6 @@ export default async function OrdersPage() {
             DataTableToolbar={DataTableToolbar}
             />
         </div>
-      </div>
     )
   }
   

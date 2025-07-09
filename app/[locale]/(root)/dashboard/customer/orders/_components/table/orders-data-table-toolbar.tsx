@@ -25,16 +25,10 @@ export function DataTableToolbar<TData>({
   const isFiltered = table.getState().columnFilters.length > 0
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex flex-1 items-center gap-2">
-        <Input
-          placeholder="Rechercher par ID"
-          value={(table.getColumn("id")?.getFilterValue() as string) ?? ""}
-          onChange={(order) =>
-            table.getColumn("id")?.setFilterValue(order.target.value)
-          }
-          className="h-8 w-[150px] lg:w-[250px]"
-        />
+    <div className="flex lg:items-end items-center justify-between lg:flex-row flex-col gap-2">
+      <div className="flex flex-1 items-start gap-2 lg:flex-col flex-col-reverse">
+
+        <div className="flex items-center gap-2 justify-center">
         {table.getColumn("status") && (
           <DataTableFacetedFilter
             column={table.getColumn("status")}
@@ -48,12 +42,21 @@ export function DataTableToolbar<TData>({
             onClick={() => table.resetColumnFilters()}
             className="h-8 px-2 lg:px-3"
           >
-            Reset
-            <Cross2Icon className="ml-2 h-4 w-4" />
-          </Button>
-        )}
+            <span className="hidden xl:block">Reset</span>
+            <Cross2Icon className="h-4 w-4" />
+            </Button>
+          )}
+        </div>
+        <Input
+          placeholder="Rechercher par ID"
+          value={(table.getColumn("id")?.getFilterValue() as string) ?? ""}
+          onChange={(order) =>
+            table.getColumn("id")?.setFilterValue(order.target.value)
+          }
+          className="h-8 w-full"
+        />
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center justify-center gap-2">
         <DataTableRefreshOptions table={table} />
         <DataTableCalendarOptions table={table} />
         <DataTableImportOptions table={table} />

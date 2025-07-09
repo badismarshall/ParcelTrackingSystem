@@ -26,7 +26,7 @@ export function DataTableRefreshOptions<TData>({
           <Button
             variant="outline"
             size="sm"
-            className="ml-2 hidden h-8 lg:flex"
+            className="ml-2 h-8 flex"
             // onClick={handleRefreshData}
           >
             <span className="h-4 w-4">{Icons.refresh ? <Icons.refresh /> : "↻"}</span>

@@ -36,10 +36,10 @@ export function DataTableCalendarOptions<TData>({
         <Button
           variant="outline"
           size="sm"
-          className="ml-2 hidden h-8 lg:flex"
+          className="h-8 flex"
         >
-          <span className="mr-2 h-4 w-4">{Icons.calendar ? <Icons.calendar /> : "📅"}</span>
-          Calendar
+          <span className="xl:mr-2 h-4 w-4">{Icons.calendar ? <Icons.calendar /> : "📅"}</span>
+          <span className="hidden xl:block">Calendar</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-auto p-4">

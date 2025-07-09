@@ -22,9 +22,9 @@ export default async function DashboardLayout({
         <SidebarInset className="px-2 pt-2">
             <HeaderInsetSidebar/>
             {/* <SidebarTrigger />	 */}  
-            {/* <div className="gap-4 mt-7 sm:mt-1 sm:pt-2 md:gap-8 px-1 lg:px-3"> */}
+            <div className="@container/main flex flex-1 flex-col gap-2 p-8 md:flex">
                 {children}
-            {/* </div> */}
+            </div>
         </SidebarInset>
       </SidebarProvider>
     </>

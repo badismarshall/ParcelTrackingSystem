@@ -11,6 +11,8 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { NotificationCenter } from "@/components/notification-center";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { Icons } from "@/components/ui/icons";
+import { useSidebar } from "@/components/ui/sidebar"
 
 // --- Simulated Backend API ---
 let masterNotifications: any[] = [ /* ... initial notifications ... */ ];
@@ -32,7 +34,7 @@ const deleteNotification = async (id: string) => {
 
 export default function CustomerSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 const queryClient = new QueryClient()
-
+const { open } = useSidebar()
     const user = {
         name: "Badis",
         email: "me_badis@yahoo.fr",
@@ -61,12 +63,23 @@ const queryClient = new QueryClient()
         <QueryClientProvider client={queryClient}>
             <AppSidebar {...props}>
                 <SidebarHeader>
+                    <div className="mt-2 mb-2 items-center justify-center flex gap-2">
+                        <div className="pl-2.5">
+                            <Icons.logo className="w-4 h-4" />
+                        </div>
+                        {open && (
+                            <>
+                                <span className="text-lg font-bold">Café Noir</span>
+                            </>
+                        )}
+                    </div>
+
                     <SidebarMenu>
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <SidebarMenuItem>
                                     <SidebarMenuButton asChild>
-                                        <a href="#" className={cn('transition-colors hover:text-foreground bg-primary')}>
+                                        <a href="/dashboard/customer/orders/new" className={cn('transition-colors hover:text-foreground bg-primary')}>
                                             {<Plus/>}    
                                             <span>Ajouter commande</span>
                                         </a>

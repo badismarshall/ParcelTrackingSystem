@@ -33,10 +33,10 @@ export function DataTableExportOptions<TData>({
         <Button
           variant="outline"
           size="sm"
-          className="ml-2 hidden h-8 lg:flex"
+          className="h-8 flex"
         >
-          <span className="mr-2 h-4 w-4">{Icons.export ? <Icons.export /> : "⇩"}</span>
-          Export
+          <span className="xl:mr-2 h-4 w-4">{Icons.export ? <Icons.export /> : "⇩"}</span>
+          <span className="hidden sm:block">Export</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="flex p-1">

@@ -395,7 +395,6 @@ export function NotificationCenter({
                 "relative hover:bg-muted transition-all duration-200",
                 className
               )}
-              // className="transition-colors hover:text-foreground"
             >
               <Bell className="h-4 w-4" />
               <span>Notifications</span>
