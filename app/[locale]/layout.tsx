@@ -47,7 +47,7 @@ export default async function Layout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased flex flex-col justify-center h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable}`}
       >
         <TooltipProvider>
           <NextIntlClientProvider> 

@@ -1,9 +1,9 @@
-import React from 'react'
+import HeroSection from './(root)/_components/hero-section'
 
 function page() {
   return (
     <div>
-      <h1>Root Page</h1>
+      <HeroSection />
     </div>
   )
 }

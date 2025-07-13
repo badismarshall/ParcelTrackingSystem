@@ -12,9 +12,11 @@ function NewOrderPage() {
         </p>
       </div>
     </div>
-    <Card className="p-4 max-w-6xl mx-auto">
+    {/* <Card className="p-4 max-w-6xl mx-auto"> */}
+    <div className="flex justify-center items-center h-full">
         <NewOrderStepper />
-    </Card>
+    </div>
+    {/* </Card> */}
   </div>
   )
 }
