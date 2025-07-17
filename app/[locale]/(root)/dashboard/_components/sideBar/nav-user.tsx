@@ -5,6 +5,7 @@ import {
   Bell,
   ChevronsUpDown,
   CreditCard,
+  Info,
   LogOut,
   Sparkles,
   User,
@@ -31,6 +32,9 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
+import { Dialog, DialogTitle, DialogHeader, DialogContent, DialogTrigger, DialogFooter, DialogClose } from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 
 export function NavUser({
   user,
@@ -65,9 +69,11 @@ export function NavUser({
                   <span className="sr-only">Online</span>
                 </span>
               </div>
-              <div className="grid flex-1 text-left text-sm leading-tight">
+              <div className="grid flex-1 text-left text-sm leading-tight gap-1">
                 <span className="truncate font-semibold">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
+                <Badge variant="outline" className="px-2 py-0.5 text-primary bg-primary/10 border-primary/20 text-[10px] font-medium">
+                  Membre
+                </Badge>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -106,6 +112,34 @@ export function NavUser({
                   </DropdownMenuItem>
                 </Link>
             </DropdownMenuGroup>
+            <DropdownMenuSeparator/>
+            <Dialog>
+              <DialogTrigger asChild>
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                  <Info className="w-4 h-4" />
+                  À propos
+                </DropdownMenuItem>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>À propos</DialogTitle>
+                </DialogHeader>
+                <div className="py-2">
+                  <p>
+                    Ceci est une application de gestion de tableau de bord. Version 1.0.0.<br />
+                    Développé par l'équipe Café Noir.
+                  </p>
+                </div>
+                <DialogFooter> 
+                  <DialogClose asChild>
+                    <Button>Fermer</Button>
+                  </DialogClose>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+            {/* <DropdownMenuItem>
+              A propos
+            </DropdownMenuItem> */}
             <DropdownMenuSeparator/>
             <DropdownMenuItem className="text-sm gap-2">
               <LogOut />

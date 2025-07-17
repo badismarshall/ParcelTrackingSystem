@@ -10,30 +10,37 @@ import { Form } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { defineStepper } from '@/components/ui/stepper';
+import ProductDetails from '../product-details';
+import CustomerInformation from '../customer-information';
+import DeliveryDetails from '../delivery-details';
+import { productDetailsValidation } from '../../_validations/product-details-validation';
+import { customerInformationValidation } from '../../_validations/customer-information-validation';
+import { deliveryDetailsValidation } from '../../_validations/delivery-details-validation';
 
 
-const shippingSchema = z.object({
-  address: z.string().min(1, 'Address is required'),
-  city: z.string().min(1, 'City is required'),
-  postalCode: z.string().min(5, 'Postal code is required'),
-});
+// const shippingSchema = z.object({
+//   address: z.string().min(1, 'Address is required'),
+//   city: z.string().min(1, 'City is required'),
+//   postalCode: z.string().min(5, 'Postal code is required'),
+// });
 
-const paymentSchema = z.object({
-  cardNumber: z.string().min(16, 'Card number is required'),
-  expirationDate: z.string().min(5, 'Expiration date is required'),
-  cvv: z.string().min(3, 'CVV is required'),
-});
+// const paymentSchema = z.object({
+//   cardNumber: z.string().min(16, 'Card number is required'),
+//   expirationDate: z.string().min(5, 'Expiration date is required'),
+//   cvv: z.string().min(3, 'CVV is required'),
+// });
 
-type ShippingFormValues = z.infer<typeof shippingSchema>;
-type PaymentFormValues = z.infer<typeof paymentSchema>;
+  // type ShippingFormValues = z.infer<typeof shippingSchema>;
+  // type PaymentFormValues = z.infer<typeof paymentSchema>;
 
 const { useStepper, steps, utils } = defineStepper(
-  { id: 'shipping', label: 'Shipping', schema: shippingSchema },
-  { id: 'payment', label: 'Payment', schema: paymentSchema },
+  { id: 'product', label: 'Product', schema: productDetailsValidation },
+  { id: 'customer', label: 'Customer', schema: customerInformationValidation },
+  { id: 'delivery', label: 'Delivery', schema: deliveryDetailsValidation },
   { id: 'complete', label: 'Complete', schema: z.object({}) }
 );
 
-function App() {
+function NewOrderStepper() {
   const stepper = useStepper();
 
   const form = useForm({
@@ -57,7 +64,7 @@ function App() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 p-6 border rounded-lg w-[550px]"
+        className="space-y-6 p-6 border rounded-lg w-full"
       >
         <div className="flex justify-between">
           <h2 className="text-lg font-medium">Checkout</h2>
@@ -69,12 +76,12 @@ function App() {
         </div>
         <nav aria-label="Checkout Steps" className="group my-4">
           <ol
-            className="flex items-center justify-between gap-2"
+            className="flex items-center justify-center gap-2"
             aria-orientation="horizontal"
           >
             {stepper.all.map((step, index, array) => (
               <React.Fragment key={step.id}>
-                <li className="flex items-center gap-2 flex-shrink-0 flex-col">
+                <li className="flex items-center gap-2 flex-shrink-0 flex-col lg:px-2">
                   <Button
                     type="button"
                     role="tab"
@@ -112,9 +119,9 @@ function App() {
         </nav>
         <div className="space-y-4">
           {stepper.switch({
-            shipping: () => <ShippingComponent />,
-            payment: () => <PaymentComponent />,
-            complete: () => <CompleteComponent />,
+            product: () => <ProductDetails />,
+            customer: () => <CustomerInformation />,
+            delivery: () => <DeliveryDetails />,
           })}
           {!stepper.isLast ? (
             <div className="flex justify-end gap-4">
@@ -138,138 +145,6 @@ function App() {
   );
 }
 
-function ShippingComponent() {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<ShippingFormValues>();
 
-  return (
-    <div className="grid grid-cols-1 xl:grid-cols-3 pt-5 gap-3">
-      <div className="space-y-2">
-        <label
-          htmlFor={register('address').name}
-          className="block text-sm font-medium text-primary"
-        >
-          Address
-        </label>
-        <Input
-          id={register('address').name}
-          {...register('address')}
-          className="block w-full p-2 border rounded-md"
-        />
-        {errors.address && (
-          <span className="text-sm text-destructive">
-            {errors.address.message}
-          </span>
-        )}
-      </div>
-      <div className="space-y-2">
-        <label
-          htmlFor={register('city').name}
-          className="block text-sm font-medium text-primary"
-        >
-          City
-        </label>
-        <Input
-          id={register('city').name}
-          {...register('city')}
-          className="block w-full p-2 border rounded-md"
-        />
-        {errors.city && (
-          <span className="text-sm text-destructive">
-            {errors.city.message}
-          </span>
-        )}
-      </div>
-      <div className="space-y-2">
-        <label
-          htmlFor={register('postalCode').name}
-          className="block text-sm font-medium text-primary"
-        >
-          Postal Code
-        </label>
-        <Input
-          id={register('postalCode').name}
-          {...register('postalCode')}
-          className="block w-full p-2 border rounded-md"
-        />
-        {errors.postalCode && (
-          <span className="text-sm text-destructive">
-            {errors.postalCode.message}
-          </span>
-        )}
-      </div>
-    </div>
-  );
-}
+export default NewOrderStepper;
 
-function PaymentComponent() {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<PaymentFormValues>();
-
-  return (
-    <div className="space-y-4 text-start">
-      <div className="space-y-2">
-        <label
-          htmlFor={register('cardNumber').name}
-          className="block text-sm font-medium text-primary"
-        >
-          Card Number
-        </label>
-        <Input
-          id={register('cardNumber').name}
-          {...register('cardNumber')}
-          className="block w-full p-2 border rounded-md"
-        />
-        {errors.cardNumber && (
-          <span className="text-sm text-destructive">
-            {errors.cardNumber.message}
-          </span>
-        )}
-      </div>
-      <div className="space-y-2">
-        <label
-          htmlFor={register('expirationDate').name}
-          className="block text-sm font-medium text-primary"
-        >
-          Expiration Date
-        </label>
-        <Input
-          id={register('expirationDate').name}
-          {...register('expirationDate')}
-          className="block w-full p-2 border rounded-md"
-        />
-        {errors.expirationDate && (
-          <span className="text-sm text-destructive">
-            {errors.expirationDate.message}
-          </span>
-        )}
-      </div>
-      <div className="space-y-2">
-        <label
-          htmlFor={register('cvv').name}
-          className="block text-sm font-medium text-primary"
-        >
-          CVV
-        </label>
-        <Input
-          id={register('cvv').name}
-          {...register('cvv')}
-          className="block w-full p-2 border rounded-md"
-        />
-        {errors.cvv && (
-          <span className="text-sm text-destructive">{errors.cvv.message}</span>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function CompleteComponent() {
-  return <div className="text-center">Thank you! Your order is complete.</div>;
-}
-
-export default App;

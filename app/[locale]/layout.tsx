@@ -47,7 +47,7 @@ export default async function Layout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable}`}
+        className={`${geistSans.variable}`}
       >
         <TooltipProvider>
           <NextIntlClientProvider> 

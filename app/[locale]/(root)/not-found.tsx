@@ -1,13 +1,11 @@
 'use client'
 
-import { usePathname } from "next/navigation";
-import { useEffect } from "react";
-import { Home, ArrowLeft, Search, AlertCircle } from "lucide-react";
+import { Home, ArrowLeft, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 
-const NotFound = () => {
+export default function NotFound() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-accent/20 flex items-center justify-center p-4">
@@ -72,5 +70,3 @@ const NotFound = () => {
     </div>
   );
 };
-
-export default NotFound;
