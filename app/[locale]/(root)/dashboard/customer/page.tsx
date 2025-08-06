@@ -21,7 +21,15 @@ import { ChartLineLinear } from "./_components/char-line-linear";
 export default function MagicCardDemo() {
   const { theme } = useTheme();
   return (
-    <div className="w-full flex flex-col gap-4 px-4 lg:px-6">
+    <div className="w-full flex flex-col gap-4 ">
+      <div className="flex items-center justify-between space-y-2">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight">Dashboard</h2>
+          <p className="text-muted-foreground">
+            Dashboard de l'utilisateur.
+          </p>
+        </div>
+    </div>
     <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs  @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
     <Card className="p-0 w-full shadow-none border-none">
       <MagicCard
