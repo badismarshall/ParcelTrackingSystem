@@ -1,11 +1,16 @@
 import { DataTable } from "@/components/shared/table/data-table";
 import { ChartAreaInteractive } from "../_components/dashboardTestComponets/ChartAreaInteractive";
 import { SectionCards } from "../_components/dashboardTestComponets/section-cards";
-import { promises as fs } from "fs"
-import path from "path"
-import { z } from "zod"
+import { getCurrentUser } from "@/data/auth/user-auth";
+import { redirect } from "next/navigation";
+import { getLocale } from "next-intl/server";
 
-export default async function DashboardPage() {
+export default async function AdministratorDashboardPage() {
+  const locale = await getLocale();
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect(`/${locale}/sign-in`);
+  }
 
     return (
       <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">

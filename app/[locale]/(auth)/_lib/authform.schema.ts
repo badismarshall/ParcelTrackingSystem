@@ -60,3 +60,12 @@ export function getForgetPasswordSchema(t?: (key: string) => string) {
 export type ForgetPasswordFormValues = z.infer<
   Awaited<ReturnType<typeof getForgetPasswordSchema>>
 >;
+
+export function getResetPasswordSchema(t?: (key: string) => string) {
+  return z.object({
+    password: z.string().min(1, t ? t("password_required") : "Mot de passe est requis"),
+  });
+}
+export type ResetPasswordFormValues = z.infer<
+  Awaited<ReturnType<typeof getResetPasswordSchema>>
+>;

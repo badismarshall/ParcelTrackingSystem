@@ -14,6 +14,8 @@
       "remember_me": "تذكرني",
       "sign_up": "إنشاء حساب",
       "no_account": "ليس لديك حساب؟",
+      "email_invalid_or_password": "البريد الإلكتروني أو كلمة المرور غير صالحة",
+      "login_successful": "تسجيل الدخول بنجاح",
       "validation": {
         "email_required": "البريد الإلكتروني مطلوب",
         "email_invalid": "البريد الإلكتروني غير صالح",
@@ -63,7 +65,19 @@
       "send_email": "إرسال البريد الإلكتروني",
       "back_to_sign_in": "العودة إلى تسجيل الدخول",
       "email_required": "البريد الإلكتروني مطلوب",
-      "email_invalid": "البريد الإلكتروني غير صالح"
+      "email_invalid": "البريد الإلكتروني غير صالح",
+      "reset_password": "إعادة تعيين كلمة المرور",
+      "password_placeholder": "أدخل كلمة المرور",
+      "password_required": "كلمة المرور مطلوبة",
+      "password": "كلمة المرور"
+    },
+    "reset_password": {
+      "title": "إعادة تعيين كلمة المرور",
+      "description": "أدخل كلمة المرور الجديدة",
+      "password": "كلمة المرور",
+      "password_placeholder": "أدخل كلمة المرور",
+      "password_required": "كلمة المرور مطلوبة",
+      "reset_password": "إعادة تعيين كلمة المرور"
     }
   },
   "not_found": {

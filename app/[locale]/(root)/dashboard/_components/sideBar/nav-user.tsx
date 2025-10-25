@@ -35,6 +35,9 @@ import Link from "next/link"
 import { Dialog, DialogTitle, DialogHeader, DialogContent, DialogTrigger, DialogFooter, DialogClose } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { authClient } from "@/lib/auth-client"
+import { redirect } from "next/navigation"
+import { useLocale } from "next-intl"
 
 export function NavUser({
   user,
@@ -46,7 +49,7 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
-
+  const locale = useLocale()
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -141,9 +144,18 @@ export function NavUser({
               A propos
             </DropdownMenuItem> */}
             <DropdownMenuSeparator/>
-            <DropdownMenuItem className="text-sm gap-2">
-              <LogOut />
-              Log out
+            <DropdownMenuItem className="text-sm">
+              <Button 
+                  variant="ghost" 
+                  className="w-full justify-start"
+                  onClick={ async () => {
+                    await authClient.signOut();
+                    redirect(`/${locale}/sign-in`);
+                  }}
+              >
+                <LogOut />
+                Log out
+              </Button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

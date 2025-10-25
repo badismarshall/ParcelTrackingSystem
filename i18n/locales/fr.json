@@ -14,6 +14,8 @@
       "remember_me": "Se souvenir de moi",
       "sign_up": "Créer un compte",
       "no_account": "Vous n'avez pas de compte?",
+      "email_invalid_or_password": "Email ou mot de passe incorrect",
+      "login_successful": "Connexion réussie",
       "validation": {
         "email_required": "Email est requis",
         "email_invalid": "Email invalide",
@@ -63,7 +65,19 @@
       "send_email": "Envoyer un email",
       "back_to_sign_in": "Retour à la connexion",
       "email_required": "Email est requis",
-      "email_invalid": "Email invalide"
+      "email_invalid": "Email invalide",
+      "reset_password": "Réinitialiser le mot de passe",
+      "password_placeholder": "Entrer votre mot de pass",
+      "password_required": "Mot de passe est requis",
+      "password": "Mot de passe"
+    },
+    "reset_password": {
+      "title": "Réinitialiser le mot de passe",
+      "description": "Entrez votre nouveau mot de passe",
+      "password": "Mot de passe",
+      "password_placeholder": "Entrer votre nouveau mot de pass",
+      "password_required": "Mot de passe est requis",
+      "reset_password": "Réinitialiser le mot de passe"
     }
   },
   "not_found": {

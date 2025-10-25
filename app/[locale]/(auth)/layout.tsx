@@ -6,8 +6,8 @@ export default async function AuthLayout({
   }>) {
 
     return (
-      <div className="flex flex-col justify-center items-center">
-          <main className="flex-1 w-[350px] sm:w-max">{children}</main>
+      <div className="flex flex-col justify-center items-center h-screen">
+          <main className="flex w-[350px] sm:w-max">{children}</main>
       </div>
     );
 }

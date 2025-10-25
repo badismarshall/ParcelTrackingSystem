@@ -10,55 +10,87 @@ import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { useToast } from "@/hooks/use-toast"
 import { useLocale, useTranslations } from "next-intl"
 import { isRtlLang } from "rtl-detect"
 import { 
   getForgetPasswordSchema,
-  ForgetPasswordFormValues
+  ForgetPasswordFormValues,
+  ResetPasswordFormValues,
+  getResetPasswordSchema
  } from "@/app/[locale]/(auth)/_lib/authform.schema"
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+import { useRouter, useSearchParams } from "next/navigation"
+import { authClient } from "@/lib/auth-client"
+import { useState } from "react"
 
 export function ForgetPasswordUserForm({ className, ...props }: UserAuthFormProps) {
   const t = useTranslations('auth.forget_password');
+  const tResetPassword = useTranslations('auth.reset_password');
   const locale = useLocale()
   const isRTL = isRtlLang(locale)
-  const form = useForm<ForgetPasswordFormValues>({
+  const searchParams = useSearchParams()
+  const token = searchParams.get('token')
+
+  const router = useRouter()
+  const formForgetPassword = useForm<ForgetPasswordFormValues>({
     resolver: zodResolver(getForgetPasswordSchema(t)),
     defaultValues: {
       email: '',
     },
   })
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
-  async function onSubmit(values: ForgetPasswordFormValues) {
 
-    setIsLoading(true)
+  const formResetPassword = useForm<ResetPasswordFormValues>({
+    resolver: zodResolver(getResetPasswordSchema(t)),
+    defaultValues: {
+      password: '',
+    },
+  })
+  const [loading, setLoading] = useState(false);
 
-    // const error = await login({
-    //   email: values.email,
-    //   password: values.password
-    // })
+ 
+  async function onSubmitForgetPassword(values: ForgetPasswordFormValues) {
 
-    // setIsLoading(false)
-    // if (error) {
-    //   toast({
-    //     title: "Login Failed",
-    //     variant: "destructive",
-    //   })
-    // }
+    setLoading(true)
+    await authClient.forgetPassword({
+      email: values.email,
+      redirectTo: `/${locale}/forget-password`,
+    })
+   setLoading(false)
   }
 
+
+  async function onSubmitResetPassword(values: ResetPasswordFormValues) {
+    await authClient.resetPassword({
+      newPassword: values.password,
+      token: token as string,
+    },
+    {
+      onRequest: () => {
+        setLoading(true)
+      },
+      onResponse: () => {
+        setLoading(false)
+      },
+      onError: (ctx) => {
+      },
+      onSuccess: () => {
+        router.push(`/${locale}/sign-in`)
+      },
+    })
+  }
+
+ if (!token) {
   return (
     <>
-    <Form {...form}>
+    <Form {...formForgetPassword}>
       <form 
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={formForgetPassword.handleSubmit(onSubmitForgetPassword)}
         className={cn("grid gap-6", className)}
       >
         <FormField
-          control={form.control}
+          control={formForgetPassword.control}
           name="email"
           render={({ field }) => (
             <FormItem className="grid gap-1">
@@ -74,7 +106,7 @@ export function ForgetPasswordUserForm({ className, ...props }: UserAuthFormProp
                     autoCapitalize="none"
                     autoComplete="email"
                     autoCorrect="off"
-                    disabled={isLoading}
+                    disabled={loading}
                     {...field}
                   />
               </FormControl>
@@ -82,11 +114,59 @@ export function ForgetPasswordUserForm({ className, ...props }: UserAuthFormProp
             </FormItem>
           )}
         />
-        <Button disabled={isLoading} type="submit">
-          {isLoading && (
+        <Button disabled={loading} type="submit">
+          {loading && (
             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
           )}
           {t("send_email")}
+        </Button>
+      </form>
+    </Form>
+       <div className="relative">
+         <div className="absolute inset-0 flex items-center">
+           <span className="w-full border-t" />
+         </div>
+       </div>
+    </>
+  )
+} 
+  return (
+    <>
+    <Form {...formResetPassword}>
+      <form 
+        onSubmit={formResetPassword.handleSubmit(onSubmitResetPassword)}
+        className={cn("grid gap-6", className)}
+      >
+        <FormField
+          control={formResetPassword.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem className="grid gap-1">
+              <FormLabel className={`${isRTL ? "justify-end" : "justify-start"}`} htmlFor="email">
+                {tResetPassword("password")}
+              </FormLabel>
+              <FormControl>
+                <Input
+                    className={`${isRTL ? "placeholder:text-end" : "placeholder:text-start"}`}
+                    id="password"
+                    placeholder={tResetPassword("password_placeholder")}
+                    type="password"
+                    autoCapitalize="none"
+                    autoComplete="password"
+                    autoCorrect="off"
+                    disabled={loading}
+                    {...field}
+                  />
+              </FormControl>
+              <FormMessage className={`${isRTL ? "text-end" : "text-start"}`}/>
+            </FormItem>
+          )}
+        />
+        <Button disabled={loading} type="submit">
+          {loading && (
+            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+          )}
+          {tResetPassword("reset_password")}
         </Button>
       </form>
     </Form>

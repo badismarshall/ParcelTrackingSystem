@@ -6,25 +6,31 @@ import { cn } from "@/lib/utils"
 import { Icons } from "@/components/ui/icons"
 import { Button } from '@/components/ui/button'
 import { Input } from "@/components/ui/input"
-// import { login } from "@/server/actions/userAuth"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { useToast } from "@/hooks/use-toast"
 import Link from "next/link"
+import { toast } from "sonner"
 import {useLocale, useTranslations} from 'next-intl';
 import { isRtlLang } from "rtl-detect"
 import {
   SignInFormValues,
   getSignInSchema,
 } from "@/app/[locale]/(auth)/_lib/authform.schema";
+import { useState } from "react"
+import { signIn } from "@/lib/auth-client";
+import { useRouter } from "next/navigation"
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function LoginUserAuthForm({ className, ...props }: UserAuthFormProps) {
-  const { toast } = useToast()
   const t = useTranslations('auth.sign_in');
   const validationSignInMessage = useTranslations("auth.sign_in.validation");
+
+  const [loading, setLoading] = useState(false);
+
+
+	const router = useRouter();
 
   const form = useForm<SignInFormValues>({
     resolver: zodResolver(getSignInSchema(validationSignInMessage)),
@@ -33,24 +39,40 @@ export function LoginUserAuthForm({ className, ...props }: UserAuthFormProps) {
       password: '',
     },
   })
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   async function onSubmit(values: SignInFormValues) {
-
-    setIsLoading(true)
-
-    // const error = await login({
-    //   email: values.email,
-    //   password: values.password
-    // })
-
-    // setIsLoading(false)
-    // if (error) {
-    //   toast({
-    //     title: "Login Failed",
-    //     variant: "destructive",
-    //   })
-    // }
+    await signIn.email(
+      {
+          email: values.email,
+          password: values.password,
+          rememberMe: true,
+      },
+      {
+        onRequest: (ctx: any) => {
+          setLoading(true);
+        },
+        onResponse: (ctx: any) => {
+          setLoading(false);
+        },
+        onError: (ctx: any) => {
+          toast.error(t('email_invalid_or_password'), 
+            { 
+              position: "bottom-center",
+              duration: 3000,
+            }
+          );
+          console.log(ctx.error.message);
+        },
+        onSuccess: (ctx: any) => {
+          toast.success(t('login_successful'), 
+          {
+            position: "bottom-center",
+            duration: 3000,
+          });
+          router.push("/dashboard/administrator");
+        },
+      },
+      );
   }
   const locale = useLocale();
   const isRTL = isRtlLang(locale);
@@ -72,13 +94,14 @@ export function LoginUserAuthForm({ className, ...props }: UserAuthFormProps) {
               <FormControl>
                 <Input
                     className={`${isRTL ? "placeholder:text-end" : "placeholder:text-start"}`}
+                    required
                     id="email"
                     placeholder={t('email_placeholder')}
                     type="email"
                     autoCapitalize="none"
                     autoComplete="email"
                     autoCorrect="off"
-                    disabled={isLoading}
+                    disabled={loading}
                     {...field}
                   />
               </FormControl>
@@ -102,7 +125,8 @@ export function LoginUserAuthForm({ className, ...props }: UserAuthFormProps) {
                     type="password"
                     autoCapitalize="none"
                     autoCorrect="off"
-                    disabled={isLoading}
+                    disabled={loading}
+                    required
                     {...field}
                   />
               </FormControl>
@@ -118,11 +142,15 @@ export function LoginUserAuthForm({ className, ...props }: UserAuthFormProps) {
             </FormItem>
           )}
         />
-        <Button disabled={isLoading} type="submit">
-          {isLoading && (
+        <Button 
+          disabled={loading} 
+          type="submit"
+        >
+          {loading ? (
             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+          ) : (
+            t('sign_in')
           )}
-          {t('sign_in')}
         </Button>
         <p className="text-sm text-muted-foreground text-center">
           {t('no_account')} {" "}
