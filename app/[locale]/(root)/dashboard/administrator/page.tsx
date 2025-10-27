@@ -3,13 +3,11 @@ import { ChartAreaInteractive } from "../_components/dashboardTestComponets/Char
 import { SectionCards } from "../_components/dashboardTestComponets/section-cards";
 import { getCurrentUser } from "@/data/auth/user-auth";
 import { redirect } from "next/navigation";
-import { getLocale } from "next-intl/server";
 
 export default async function AdministratorDashboardPage() {
-  const locale = await getLocale();
   const user = await getCurrentUser();
   if (!user) {
-    redirect(`/${locale}/sign-in`);
+    redirect(`/sign-in`);
   }
 
     return (

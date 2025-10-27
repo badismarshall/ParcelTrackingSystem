@@ -36,6 +36,8 @@
       "password_confirmation_placeholder": "أدخل تأكيد كلمة المرور",
       "account_already_exists": "لديك حساب؟",
       "sign_in": "تسجيل الدخول",
+      "sign_up_successful": "تسجيل الدخول بنجاح",
+      "sign_up_failed": "تسجيل الدخول بفشل",
       "validation": {
         "username_min": "اسم المستخدم يجب أن يكون على الأقل 6 أحرف",
         "username_max": "اسم المستخدم يجب أن يكون على الأكثر 20 حرف",
@@ -69,7 +71,8 @@
       "reset_password": "إعادة تعيين كلمة المرور",
       "password_placeholder": "أدخل كلمة المرور",
       "password_required": "كلمة المرور مطلوبة",
-      "password": "كلمة المرور"
+      "password": "كلمة المرور",
+      "email_sent_if_user_exist": "إذا كان هناك حساب موجود بهذا البريد الإلكتروني، سيتم إرسال رابط إعادة تعيين كلمة المرور إليه"
     },
     "reset_password": {
       "title": "إعادة تعيين كلمة المرور",

@@ -1,6 +1,8 @@
 import { Metadata } from "next"
 import { LoginUserAuthForm } from "./_components/user-signin-form"
 import { getTranslations } from "next-intl/server";
+import { getCurrentUser } from "@/data/auth/user-auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Parcelts - Authentification",
@@ -8,6 +10,11 @@ export const metadata: Metadata = {
 }
 
 export default async function SignInPage() {
+  const user = await getCurrentUser();
+  if (user) {
+    redirect(`/dashboard/administrator`);
+  }
+  
   const t = await getTranslations("auth.sign_in");
   return (
     <>

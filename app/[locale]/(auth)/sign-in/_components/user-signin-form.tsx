@@ -27,10 +27,10 @@ export function LoginUserAuthForm({ className, ...props }: UserAuthFormProps) {
   const t = useTranslations('auth.sign_in');
   const validationSignInMessage = useTranslations("auth.sign_in.validation");
 
+	const router = useRouter();
   const [loading, setLoading] = useState(false);
 
 
-	const router = useRouter();
 
   const form = useForm<SignInFormValues>({
     resolver: zodResolver(getSignInSchema(validationSignInMessage)),

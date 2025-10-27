@@ -17,6 +17,7 @@ export const auth = betterAuth({
         enabled: true,
         async sendResetPassword({ user, url }: { user: User, url: string }, request: any) {
             try {
+                
             const emailHtml = await render(ResetPasswordEmail({ url }));
             
             const options = {
@@ -39,3 +40,6 @@ export const auth = betterAuth({
         nextCookies() 
     ],
 });
+
+
+// TODO: Add email verification

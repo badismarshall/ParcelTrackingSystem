@@ -71,19 +71,6 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
           },
         },
       });
-
-    // const error = await login({
-    //   email: values.email,
-    //   password: values.password
-    // })
-
-    // setIsLoading(false)
-    // if (error) {
-    //   toast({
-    //     title: "Login Failed",
-    //     variant: "destructive",
-    //   })
-    // }
   }
   const locale = useLocale();
   const isRTL = isRtlLang(locale);
@@ -208,7 +195,7 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
           {loading ? (
             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
           ) : (
-            t('sign_up')
+            t('title')
           )}
         </Button>
         <p className="text-sm text-muted-foreground text-center">

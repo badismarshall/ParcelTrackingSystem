@@ -36,6 +36,8 @@
       "password_confirmation_placeholder": "Confirmer votre mot de pass",
       "account_already_exists": "Vous avez déjà un compte?",
       "sign_in": "Se connecter",
+      "sign_up_successful": "Création de compte réussie",
+      "sign_up_failed": "Création de compte échouée",
       "validation": {
         "username_min": "Nom d'utilisateur doit être au moins de 6 caractères",
         "username_max": "Nom d'utilisateur doit être au plus de 20 caractères",
@@ -69,7 +71,8 @@
       "reset_password": "Réinitialiser le mot de passe",
       "password_placeholder": "Entrer votre mot de pass",
       "password_required": "Mot de passe est requis",
-      "password": "Mot de passe"
+      "password": "Mot de passe",
+      "email_sent_if_user_exist": "Si un compte existe avec cet email, vous recevrez un lien de réinitialisation de mot de passe"
     },
     "reset_password": {
       "title": "Réinitialiser le mot de passe",

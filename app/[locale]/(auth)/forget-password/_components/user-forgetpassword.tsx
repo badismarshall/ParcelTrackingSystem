@@ -23,6 +23,7 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 import { useRouter, useSearchParams } from "next/navigation"
 import { authClient } from "@/lib/auth-client"
 import { useState } from "react"
+import { toast } from "sonner"
 
 export function ForgetPasswordUserForm({ className, ...props }: UserAuthFormProps) {
   const t = useTranslations('auth.forget_password');
@@ -52,12 +53,27 @@ export function ForgetPasswordUserForm({ className, ...props }: UserAuthFormProp
  
   async function onSubmitForgetPassword(values: ForgetPasswordFormValues) {
 
-    setLoading(true)
     await authClient.forgetPassword({
       email: values.email,
-      redirectTo: `/${locale}/forget-password`,
+      redirectTo: "/forget-password",
+    },
+    {
+      onRequest: () => {
+        setLoading(true)
+      },
+      onResponse: (ctx) => {
+        setLoading(false)
+      },
+      onError: (ctx) => {
+        toast.error(ctx.error.message, {
+          position: "bottom-center",
+          duration: 3000,
+        })
+      },
+      onSuccess: () => {
+        router.push("/email-sent")
+      },
     })
-   setLoading(false)
   }
 
 
@@ -76,7 +92,7 @@ export function ForgetPasswordUserForm({ className, ...props }: UserAuthFormProp
       onError: (ctx) => {
       },
       onSuccess: () => {
-        router.push(`/${locale}/sign-in`)
+        router.push("/sign-in")
       },
     })
   }

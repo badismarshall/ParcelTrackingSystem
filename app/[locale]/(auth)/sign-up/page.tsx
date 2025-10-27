@@ -2,6 +2,8 @@ import { Metadata } from "next"
 import Link from "next/link"
 import { SignUpUserForm } from "./_components/user-signup-form"
 import { getTranslations } from "next-intl/server";
+import { getCurrentUser } from "@/data/auth/user-auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Parcels - Authentification",
@@ -9,6 +11,10 @@ export const metadata: Metadata = {
 }
 
 export default async function SignUpPage() {
+  const user = await getCurrentUser();
+  if (user) {
+    redirect(`/dashboard/administrator`);
+  }
   const t = await getTranslations("auth.sign_up");
   return (
     <>
