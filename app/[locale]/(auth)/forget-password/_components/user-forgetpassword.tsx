@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils"
 import { Icons } from "@/components/ui/icons"
 import { Button } from '@/components/ui/button'
 import { Input } from "@/components/ui/input"
-// import { login } from "@/server/actions/userAuth"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
@@ -15,25 +14,23 @@ import { isRtlLang } from "rtl-detect"
 import { 
   getForgetPasswordSchema,
   ForgetPasswordFormValues,
-  ResetPasswordFormValues,
-  getResetPasswordSchema
  } from "@/app/[locale]/(auth)/_lib/authform.schema"
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { authClient } from "@/lib/auth-client"
 import { useState } from "react"
 import { toast } from "sonner"
 
 export function ForgetPasswordUserForm({ className, ...props }: UserAuthFormProps) {
   const t = useTranslations('auth.forget_password');
-  const tResetPassword = useTranslations('auth.reset_password');
+
   const locale = useLocale()
   const isRTL = isRtlLang(locale)
-  const searchParams = useSearchParams()
-  const token = searchParams.get('token')
 
+  const [loading, setLoading] = useState(false);
   const router = useRouter()
+
   const formForgetPassword = useForm<ForgetPasswordFormValues>({
     resolver: zodResolver(getForgetPasswordSchema(t)),
     defaultValues: {
@@ -42,20 +39,12 @@ export function ForgetPasswordUserForm({ className, ...props }: UserAuthFormProp
   })
 
 
-  const formResetPassword = useForm<ResetPasswordFormValues>({
-    resolver: zodResolver(getResetPasswordSchema(t)),
-    defaultValues: {
-      password: '',
-    },
-  })
-  const [loading, setLoading] = useState(false);
-
  
   async function onSubmitForgetPassword(values: ForgetPasswordFormValues) {
 
     await authClient.forgetPassword({
       email: values.email,
-      redirectTo: "/forget-password",
+      redirectTo: `/${locale}/forget-password`,
     },
     {
       onRequest: () => {
@@ -65,7 +54,7 @@ export function ForgetPasswordUserForm({ className, ...props }: UserAuthFormProp
         setLoading(false)
       },
       onError: (ctx) => {
-        toast.error(ctx.error.message, {
+        toast.error(ctx.error.message || t('failed_to_send_email'), {
           position: "bottom-center",
           duration: 3000,
         })
@@ -76,28 +65,6 @@ export function ForgetPasswordUserForm({ className, ...props }: UserAuthFormProp
     })
   }
 
-
-  async function onSubmitResetPassword(values: ResetPasswordFormValues) {
-    await authClient.resetPassword({
-      newPassword: values.password,
-      token: token as string,
-    },
-    {
-      onRequest: () => {
-        setLoading(true)
-      },
-      onResponse: () => {
-        setLoading(false)
-      },
-      onError: (ctx) => {
-      },
-      onSuccess: () => {
-        router.push("/sign-in")
-      },
-    })
-  }
-
- if (!token) {
   return (
     <>
     <Form {...formForgetPassword}>
@@ -123,6 +90,7 @@ export function ForgetPasswordUserForm({ className, ...props }: UserAuthFormProp
                     autoComplete="email"
                     autoCorrect="off"
                     disabled={loading}
+                    required
                     {...field}
                   />
               </FormControl>
@@ -130,59 +98,15 @@ export function ForgetPasswordUserForm({ className, ...props }: UserAuthFormProp
             </FormItem>
           )}
         />
-        <Button disabled={loading} type="submit">
-          {loading && (
+        <Button 
+          disabled={loading} 
+          type="submit"
+        >
+          {loading ? (
             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+          ) : (
+            t("send_email")
           )}
-          {t("send_email")}
-        </Button>
-      </form>
-    </Form>
-       <div className="relative">
-         <div className="absolute inset-0 flex items-center">
-           <span className="w-full border-t" />
-         </div>
-       </div>
-    </>
-  )
-} 
-  return (
-    <>
-    <Form {...formResetPassword}>
-      <form 
-        onSubmit={formResetPassword.handleSubmit(onSubmitResetPassword)}
-        className={cn("grid gap-6", className)}
-      >
-        <FormField
-          control={formResetPassword.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem className="grid gap-1">
-              <FormLabel className={`${isRTL ? "justify-end" : "justify-start"}`} htmlFor="email">
-                {tResetPassword("password")}
-              </FormLabel>
-              <FormControl>
-                <Input
-                    className={`${isRTL ? "placeholder:text-end" : "placeholder:text-start"}`}
-                    id="password"
-                    placeholder={tResetPassword("password_placeholder")}
-                    type="password"
-                    autoCapitalize="none"
-                    autoComplete="password"
-                    autoCorrect="off"
-                    disabled={loading}
-                    {...field}
-                  />
-              </FormControl>
-              <FormMessage className={`${isRTL ? "text-end" : "text-start"}`}/>
-            </FormItem>
-          )}
-        />
-        <Button disabled={loading} type="submit">
-          {loading && (
-            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-          )}
-          {tResetPassword("reset_password")}
         </Button>
       </form>
     </Form>

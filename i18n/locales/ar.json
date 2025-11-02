@@ -1,5 +1,14 @@
 {
   "auth": {
+    "verify": {
+      "verification_instructions": "سنرسل لك بريدًا إلكترونيًا لتأكيد حسابك بعد التحقق.",
+      "verification_successful": "تم تحقق حسابك بنجاح.",
+      "verification_failed": "فشل تحقق حسابك.",
+      "verification_expired": "رابط التحقق منتهي الصلاحية.",
+      "verification_invalid": "رابط التحقق منتهي الصلاحية.",
+      "verification_required": "يجب عليك تحقق حسابك قبل الوصول إلى مساحتك الشخصية.",
+      "back_to_sign_in": "العودة إلى تسجيل الدخول"
+    },
     "sign_in": {
       "welcome": "Parcelts مرحباً بك في",
       "welcome_description": "أدخل بيانات اعتماد تسجيل الدخول الخاصة بك للوصول إلى حسابك",
@@ -16,6 +25,7 @@
       "no_account": "ليس لديك حساب؟",
       "email_invalid_or_password": "البريد الإلكتروني أو كلمة المرور غير صالحة",
       "login_successful": "تسجيل الدخول بنجاح",
+      "failed_to_login": "تسجيل الدخول بفشل",
       "validation": {
         "email_required": "البريد الإلكتروني مطلوب",
         "email_invalid": "البريد الإلكتروني غير صالح",
@@ -72,15 +82,25 @@
       "password_placeholder": "أدخل كلمة المرور",
       "password_required": "كلمة المرور مطلوبة",
       "password": "كلمة المرور",
+      "failed_to_send_email": "فشل إرسال البريد الإلكتروني",
+      "invalid_link_title": "رابط إعادة تعيين غير صالح أو منتهي الصلاحية",
+      "invalid_link_description": "هذا رابط إعادة تعيين كلمة المرور غير صالح أو تم استخدامه بالفعل. يرجى طلب رابط إعادة تعيين كلمة المرور جديد.",
+      "request_new_link": "طلب رابط جديد",
       "email_sent_if_user_exist": "إذا كان هناك حساب موجود بهذا البريد الإلكتروني، سيتم إرسال رابط إعادة تعيين كلمة المرور إليه"
     },
     "reset_password": {
       "title": "إعادة تعيين كلمة المرور",
-      "description": "أدخل كلمة المرور الجديدة",
+      "description": "لقد حصلنا على طلب لإعادة تعيين كلمة المرور. يرجى النقر على الزر أدناه لتعيين كلمة مرور جديدة.",
       "password": "كلمة المرور",
       "password_placeholder": "أدخل كلمة المرور",
       "password_required": "كلمة المرور مطلوبة",
-      "reset_password": "إعادة تعيين كلمة المرور"
+      "reset_password": "إعادة تعيين كلمة المرور",
+      "reset_password_preview": "إعادة تعيين كلمة المرور لحسابك.",
+      "reset_password_if_not_requested": "إذا لم تطلب إعادة تعيين كلمة المرور، يمكنك تجاهل هذا البريد الإلكتروني—كلمة المرور ستبقى غير متغيرة.",
+      "failed_to_reset_password": "فشل إعادة تعيين كلمة المرور",
+      "password_reset_successful": "تم إعادة تعيين كلمة المرور بنجاح",
+      "password_reset_successful_description": "تم إعادة تعيين كلمة المرور بنجاح. يرجى تسجيل الدخول للوصول إلى مساحتك الشخصية.",
+      "go_to_login": "العودة إلى تسجيل الدخول"
     }
   },
   "not_found": {

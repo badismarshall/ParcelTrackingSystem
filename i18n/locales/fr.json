@@ -1,5 +1,14 @@
 {
   "auth": {
+    "verify": {
+      "verification_instructions": "Nous vous enverrons un email de confirmation une fois que votre compte sera vérifié.",
+      "verification_successful": "Votre compte a été vérifié avec succès.",
+      "verification_failed": "Échec de la vérification de votre compte.",
+      "verification_expired": "Le lien de vérification a expiré.",
+      "verification_invalid": "Le lien de vérification est invalide.",
+      "verification_required": "Vous devez vérifier votre compte avant de pouvoir accéder à votre espace personnel.",
+      "back_to_sign_in": "Retour à la connexion"
+    },
     "sign_in": {
       "welcome": "Bienvenue à Parcelts",
       "welcome_description": "Entrez vos identifiants pour accéder à votre espace personnel.",
@@ -16,6 +25,7 @@
       "no_account": "Vous n'avez pas de compte?",
       "email_invalid_or_password": "Email ou mot de passe incorrect",
       "login_successful": "Connexion réussie",
+      "failed_to_login": "Échec de la connexion",
       "validation": {
         "email_required": "Email est requis",
         "email_invalid": "Email invalide",
@@ -72,15 +82,25 @@
       "password_placeholder": "Entrer votre mot de pass",
       "password_required": "Mot de passe est requis",
       "password": "Mot de passe",
+      "failed_to_send_email": "Échec de l'envoi de l'email",
+      "invalid_link_title": "Lien de réinitialisation invalide ou expiré",
+      "invalid_link_description": "Ce lien de réinitialisation de mot de passe est invalide ou a déjà été utilisé. Veuillez demander un nouveau lien de réinitialisation de mot de passe.",
+      "request_new_link": "Demander un nouveau lien",
       "email_sent_if_user_exist": "Si un compte existe avec cet email, vous recevrez un lien de réinitialisation de mot de passe"
     },
     "reset_password": {
       "title": "Réinitialiser le mot de passe",
-      "description": "Entrez votre nouveau mot de passe",
+      "description": "Nous avons reçu une demande de réinitialisation de votre mot de passe. Cliquez sur le bouton ci-dessous pour définir un nouveau mot de passe.",
       "password": "Mot de passe",
       "password_placeholder": "Entrer votre nouveau mot de pass",
       "password_required": "Mot de passe est requis",
-      "reset_password": "Réinitialiser le mot de passe"
+      "reset_password": "Réinitialiser le mot de passe",
+      "reset_password_preview": "Réinitialiser votre mot de passe pour votre compte.",
+      "reset_password_if_not_requested": "Si vous n'avez pas demandé de réinitialisation de mot de passe, vous pouvez ignorer cet email—votre mot de passe restera inchangé.",
+      "failed_to_reset_password": "Échec de la réinitialisation du mot de passe",
+      "password_reset_successful": "Réinitialisation du mot de passe réussie",
+      "password_reset_successful_description": "Votre mot de passe a été réinitialisé. Veuillez vous connecter pour accéder à votre espace personnel.",
+      "go_to_login": "Aller à la connexion"
     }
   },
   "not_found": {

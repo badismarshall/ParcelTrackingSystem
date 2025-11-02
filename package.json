@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prisma:generate": "cd prisma && npx prisma generate",
-    "prisma:studio": "cd prisma && npx prisma studio",
-    "prisma:push": "cd prisma && npx prisma db push"
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:studio": "npx prisma studio",
+    "prisma:push": "npx prisma db push"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

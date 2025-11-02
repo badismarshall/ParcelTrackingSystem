@@ -20,6 +20,7 @@ import {
 import { useState } from "react"
 import { signIn } from "@/lib/auth-client";
 import { useRouter } from "next/navigation"
+import { Eye, EyeOff } from "lucide-react"
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -29,7 +30,9 @@ export function LoginUserAuthForm({ className, ...props }: UserAuthFormProps) {
 
 	const router = useRouter();
   const [loading, setLoading] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
+  const locale = useLocale();
+  const isRTL = isRtlLang(locale);
 
 
   const form = useForm<SignInFormValues>({
@@ -55,13 +58,12 @@ export function LoginUserAuthForm({ className, ...props }: UserAuthFormProps) {
           setLoading(false);
         },
         onError: (ctx: any) => {
-          toast.error(t('email_invalid_or_password'), 
+          toast.error(ctx.error.message || t('failed_to_login'), 
             { 
               position: "bottom-center",
               duration: 3000,
             }
           );
-          console.log(ctx.error.message);
         },
         onSuccess: (ctx: any) => {
           toast.success(t('login_successful'), 
@@ -74,8 +76,7 @@ export function LoginUserAuthForm({ className, ...props }: UserAuthFormProps) {
       },
       );
   }
-  const locale = useLocale();
-  const isRTL = isRtlLang(locale);
+
   return (
     <>
     <Form {...form}>
@@ -118,17 +119,31 @@ export function LoginUserAuthForm({ className, ...props }: UserAuthFormProps) {
                 {t('password')}
               </FormLabel>
               <FormControl>
+                <div className="relative">
                 <Input
                     className={`${isRTL ? "placeholder:text-end" : "placeholder:text-start"}`}
                     id="password"
                     placeholder={t('password_placeholder')}
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     autoCapitalize="none"
                     autoCorrect="off"
                     disabled={loading}
                     required
                     {...field}
                   />
+                  <Button 
+                    className="absolute top-0 right-0 h-full px-3 hover:bg-transparent"
+                    onClick={() => setShowPassword(!showPassword)}
+                    size="icon"
+                    type="button"
+                    variant="ghost"
+                    tabIndex={-1}
+                  >
+                    {showPassword ? <EyeOff className="size-4 text-muted-foreground" /> 
+                        : 
+                        <Eye className="size-4 text-muted-foreground" />}
+                  </Button>
+                </div>
               </FormControl>
               <FormMessage className={`${isRTL ? "text-end" : "text-start"}`}/>
               <FormDescription className="text-primary text-end">
@@ -147,7 +162,7 @@ export function LoginUserAuthForm({ className, ...props }: UserAuthFormProps) {
           type="submit"
         >
           {loading ? (
-            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            <Icons.spinner className="h-4 w-4 animate-spin" />
           ) : (
             t('sign_in')
           )}

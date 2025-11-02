@@ -20,6 +20,7 @@ import { isRtlLang } from "rtl-detect"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { signUp } from "@/lib/auth-client"
+import { Eye, EyeOff } from "lucide-react"
 
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -28,11 +29,12 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
   const t = useTranslations('auth.sign_up');
   const validationSignUpMessage = useTranslations("auth.sign_up.validation");
 
-
-
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
+  const locale = useLocale();
+  const isRTL = isRtlLang(locale);
 
   const form = useForm<SignUpFormValues>({
     resolver: zodResolver(getSignUpSchema(validationSignUpMessage)),
@@ -49,6 +51,7 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
         email: values.email,
         password: values.password,
         name: values.username,
+        callbackURL: `/${locale}/dashboard/administrator`,
         fetchOptions: {
           onResponse: () => {
             setLoading(false);
@@ -57,7 +60,7 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
             setLoading(true);
           },
           onError: (ctx) => {
-            toast.error(t('sign_up_failed'), {
+            toast.error(ctx.error.message || t('sign_up_failed'), {
               position: "bottom-center",
               duration: 3000,
             })
@@ -67,13 +70,12 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
               position: "bottom-center",
               duration: 3000,
             })
-            router.push("/dashboard/administrator");
+            router.push("/verify");
           },
         },
       });
   }
-  const locale = useLocale();
-  const isRTL = isRtlLang(locale);
+
 
   return (
     <>
@@ -142,17 +144,30 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
                 {t("password")}
               </FormLabel>
               <FormControl>
+                <div className="relative">
                 <Input
                     className={`${isRTL ? "placeholder:text-end" : "placeholder:text-start"}`}
                     id="password"
                     placeholder={t("password_placeholder")}
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     autoCapitalize="none"
                     autoCorrect="off"
                     disabled={loading}
                     required
                     {...field}
                   />
+                  <Button 
+                    className="absolute top-0 right-0 h-full px-3 hover:bg-transparent"
+                    onClick={() => setShowPassword(!showPassword)}
+                    size="icon"
+                    type="button"
+                    variant="ghost"
+                    tabIndex={-1}
+                  >
+                    {showPassword ? <EyeOff className="size-4 text-muted-foreground" /> 
+                    : <Eye className="size-4 text-muted-foreground" />}
+                  </Button>
+                </div>
               </FormControl>
               <FormMessage className={`${isRTL ? "text-end" : "text-start"}`}/>
               <FormDescription className={`${isRTL ? "text-end" : "text-start"} text-gray-400 text-xs`}>
@@ -170,11 +185,12 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
                 {t("password_confirmation")}
               </FormLabel>
               <FormControl>
+                <div className="relative">
                 <Input
                     className={`${isRTL ? "placeholder:text-end" : "placeholder:text-start"}`}
                     id="password_confirmation"
                     placeholder={t("password_confirmation_placeholder")}
-                    type="password"
+                    type={showPasswordConfirmation ? "text" : "password"}
                     autoCapitalize="none"
                     autoCorrect="off"
                     disabled={loading}
@@ -182,6 +198,18 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
                     {...field}
                     autoComplete="new-password"
                   />
+                  <Button 
+                    className="absolute top-0 right-0 h-full px-3 hover:bg-transparent"
+                    onClick={() => setShowPasswordConfirmation(!showPasswordConfirmation)}
+                    size="icon"
+                    type="button"
+                    variant="ghost"
+                    tabIndex={-1}
+                  >
+                    {showPasswordConfirmation ? <EyeOff className="size-4 text-muted-foreground" /> 
+                    : <Eye className="size-4 text-muted-foreground" />}
+                  </Button>
+                </div>
               </FormControl> 
               <FormMessage className={`${isRTL ? "text-end" : "text-start"}`}/>
             </FormItem>
