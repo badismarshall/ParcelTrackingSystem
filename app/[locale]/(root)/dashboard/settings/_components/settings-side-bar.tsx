@@ -39,20 +39,21 @@ export const SettingsSideBar = ({
           {/* <aside className='top-0 lg:sticky lg:w-1/5'>
             <SidebarNav items={sidebarNavItems} />
           </aside> */}
-          <Tabs defaultValue={sidebarNavItems[0].href}>
+          <Tabs defaultValue={sidebarNavItems[0].href} className="w-full">
           <ScrollArea
             orientation='horizontal'
             type='always'
           >
-            <TabsList className="h-auto rounded-none border-b bg-transparent p-0 w-full">
+            <TabsList className="h-auto rounded-none border-b bg-transparent p-0 w-full justify-start">
                 {
                   sidebarNavItems.map((item) => (
                     <TabsTrigger 
+                      asChild
                       key={item.href} 
                       value={item.href}
                       className="relative flex-col rounded-none px-4 py-2 text-xs after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:after:bg-primary"
                     >
-                      <Link href={item.href} className="flex items-center gap-2">
+                      <Link href={item.href} className="flex items-center gap-2 flex-row">
                         <span className='scale-125'>{item.icon}</span>
                         <span className='text-md'>{item.title}</span>
                       </Link>
@@ -67,7 +68,7 @@ export const SettingsSideBar = ({
                   <TabsContent 
                     key={item.href} 
                     value={item.href}
-                    className="flex w-full overflow-y-hidden p-1"
+                    className="flex w-full overflow-y-hidden p-1 mt-4"
                   >
                     {children}
                   </TabsContent>

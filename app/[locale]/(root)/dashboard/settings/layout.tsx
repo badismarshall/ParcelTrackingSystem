@@ -11,7 +11,7 @@ const layout = ({
   }>) => {
   return (
     <>
-        <SettingsSideBar 
+        <SettingsSideBar
           sidebarNavItems={settingsSideBarItems}
           title='Paramètres'
           description='Gérez les paramètres de vos paramètres généraux.'

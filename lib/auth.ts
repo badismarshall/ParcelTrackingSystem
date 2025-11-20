@@ -7,6 +7,8 @@ import { transporter } from "@/app/[locale]/(auth)/forget-password/_constants/tr
 import { ResetPasswordEmail } from "@/app/[locale]/(auth)/forget-password/_emails/ResetPasswordEmail";
 import { render } from '@react-email/components';
 import { VerificationEmail } from "@/app/[locale]/(auth)/sign-up/_emails/VerificationEmail";
+import { organization } from "better-auth/plugins"
+import { ac, admin as adminAc } from "./permissions";
 
 const prisma = new PrismaClient();
 
@@ -17,7 +19,7 @@ export const auth = betterAuth({
     session: {
         cookieCache: {
             enabled: true,
-            maxAge: 60 * 60 * 24 * 30, // 30 days
+            maxAge: 60, // 1 minute
         },
     },
     rateLimit: {
@@ -69,6 +71,16 @@ export const auth = betterAuth({
         },
     },
     plugins: [
+        organization({
+            ac,
+            roles: {
+                adminAc,
+            },
+            dynamicAccessControl: {
+                enabled: true,
+            },
+            defaultRole: "user",
+        }),
         admin(),
         nextCookies() 
     ],

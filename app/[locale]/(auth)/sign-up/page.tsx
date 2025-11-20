@@ -2,7 +2,7 @@ import { Metadata } from "next"
 import Link from "next/link"
 import { SignUpUserForm } from "./_components/user-signup-form"
 import { getTranslations } from "next-intl/server";
-import { getCurrentUser } from "@/data/auth/user-auth";
+import { getCurrentUser } from "@/data/user/user-auth";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {

@@ -1,4 +1,4 @@
-import { Box, CreditCard, Gift, Home, Settings, ShoppingBag, Webhook } from "lucide-react"
+import { Box, Building2, CreditCard, Gift, Home, Settings, ShoppingBag, User, Webhook } from "lucide-react"
 
 
   export const customerSidebarItemsGeneral = [
@@ -12,6 +12,12 @@ import { Box, CreditCard, Gift, Home, Settings, ShoppingBag, Webhook } from "luc
       title: 'Commandes',
       url: '/dashboard/customer/orders',
       icon: ShoppingBag,
+      isActive: false,
+    },
+    {
+      title: 'Brands',
+      url: '/dashboard/customer/brands',
+      icon: Building2,
       isActive: false,
     },
     {
@@ -35,6 +41,12 @@ import { Box, CreditCard, Gift, Home, Settings, ShoppingBag, Webhook } from "luc
   ]
 
   export const customerSidebarsItemSetting= [
+    {
+      title: 'Users',
+      url: '/dashboard/customer/users',
+      icon: User,
+      isActive: false,
+    },
     {
       title: 'Webhook',
       url: '/dashboard/customer/webhook',

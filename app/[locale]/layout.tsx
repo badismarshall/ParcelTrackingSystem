@@ -3,13 +3,13 @@ import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { ThemeModeToggle } from "@/components/shared/theme-mode-toggle";
-import { cn } from "@/lib/utils";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import LocaleSwitcher from "@/components/shared/LocaleSwitcher";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

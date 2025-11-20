@@ -1,7 +1,8 @@
 import 'server-only'
-import { cache } from 'react'
+
 import { auth } from '@/lib/auth'
 import { headers } from 'next/headers'
+import { cache } from 'react'
 
 
 export const getCurrentUser = cache(async () => {
