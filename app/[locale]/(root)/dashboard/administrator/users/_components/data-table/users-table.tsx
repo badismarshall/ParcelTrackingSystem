@@ -8,7 +8,7 @@ import { DataTableFilterMenu } from "@/components/shared/data-table/data-table-f
 import { DataTableSortList } from "@/components/shared/data-table/data-table-sort-list";
 import { DataTableToolbar } from "@/components/shared/data-table/data-table-toolbar";
 // import type { Task } from "@/db/schema";
-import type { User } from "@/db/userSchema";
+import type { User } from "@/db/schema";
 import { useDataTable } from "@/hooks/data-table/use-data-table";
 import type { DataTableRowAction, QueryKeys } from "@/types/data-table";
 import type {

@@ -1,6 +1,6 @@
 import { betterAuth, User } from "better-auth";
-import { prismaAdapter } from "better-auth/adapters/prisma";
-import { PrismaClient } from "../lib/generated/prisma";
+// import { prismaAdapter } from "better-auth/adapters/prisma";
+// import { PrismaClient } from "../lib/generated/prisma";
 import { admin } from "better-auth/plugins"
 import { nextCookies } from "better-auth/next-js";
 import { transporter } from "@/app/[locale]/(auth)/forget-password/_constants/transporteremail";
@@ -9,12 +9,14 @@ import { render } from '@react-email/components';
 import { VerificationEmail } from "@/app/[locale]/(auth)/sign-up/_emails/VerificationEmail";
 import { organization } from "better-auth/plugins"
 import { ac, admin as adminAc } from "./permissions";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { db } from "@/db";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 export const auth = betterAuth({
-    database: prismaAdapter(prisma, {
-        provider: "postgresql",
+    database: drizzleAdapter(db, {
+        provider: "pg",
     }),
     session: {
         cookieCache: {
