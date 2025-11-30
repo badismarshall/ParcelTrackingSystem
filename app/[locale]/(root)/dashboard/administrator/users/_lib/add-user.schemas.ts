@@ -27,7 +27,7 @@ export function getAddUserSchema(t?: (key: string) => string) {
     });;
 }
 
-export type AddUserFormValues = z.infer<
+export type getAddUserSchema = z.infer<
   Awaited<ReturnType<typeof getAddUserSchema>>
 >;
 

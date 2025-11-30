@@ -3,7 +3,7 @@
 import * as React from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ChangePasswordFormValues, getChangePasswordSchema } from "../../_lib/change-password.schema"
+import { ChangePasswordFormValues, getChangePasswordSchema } from "../../administrator/users/_lib/_lib/change-password.schema"
 import { useLocale, useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
 import { isRtlLang } from "rtl-detect"

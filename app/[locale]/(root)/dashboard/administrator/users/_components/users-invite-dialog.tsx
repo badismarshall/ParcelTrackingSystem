@@ -32,7 +32,7 @@ import { useTranslations } from 'next-intl'
 import { 
     getInviteUserSchema, 
     InviteUserFormValues 
-} from '@/app/[locale]/(root)/dashboard/administrator/_lib/invite-user.schemas'
+} from '@/app/[locale]/(root)/dashboard/administrator/users/_lib/invite-user.schemas'
 
 export function UsersInviteDialog() {
   const t = useTranslations('users.invite')

@@ -33,7 +33,7 @@ import { type User } from './table/users-data-table-schema'
 import { 
   getAddUserSchema, 
   AddUserFormValues 
-} from '@/app/[locale]/(root)/dashboard/administrator/_lib/add-user.schemas'
+} from '@/app/[locale]/(root)/dashboard/administrator/users/_lib/add-user.schemas'
 
 interface UsersAddDialogProps extends React.HTMLAttributes<HTMLDivElement> {
   currentRow?: User

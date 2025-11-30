@@ -10,6 +10,6 @@ export function getInviteUserSchema(t?: (key: string) => string) {
   });
 }
 
-export type InviteUserFormValues = z.infer<
+export type getInviteUserSchema = z.infer<
   Awaited<ReturnType<typeof getInviteUserSchema>>
 >;
